@@ -21,42 +21,42 @@ public class UserController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto){
-        UserDto createdUserDto = this.userService.createUser(userDto);
-        return new ResponseEntity<>(createdUserDto, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/{userId}")
-    public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto,@PathVariable Integer userId){
-
-        UserDto updatedUser =  this.userService.updateUser(userDto,userId);
-
-        return ResponseEntity.ok(updatedUser);
+    public ResponseEntity<Object> createUser(@Valid @RequestBody UserDto userDto){
+        return userService.createUser(userDto);
 
     }
 
-    @DeleteMapping("/{userId}")
-    public ResponseEntity<ApiResponse> deleteUser(@PathVariable Integer userId){
-
+//    @PutMapping("/{userId}")
+//    public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto,@PathVariable Integer userId){
+//
 //        UserDto updatedUser =  this.userService.updateUser(userDto,userId);
-
-        this.userService.userDelete(userId);
-
-        return new ResponseEntity(new ApiResponse("User Deleted Successfully",true),HttpStatus.OK);
-
-    }
-
-
-    @GetMapping("/")
-    public ResponseEntity<List<UserDto>> getAllUsers(){
-        return ResponseEntity.ok(this.userService.getAllUser());
-    }
-
-
-    @GetMapping("/{userId}")
-    public ResponseEntity<UserDto> getSingleUserById( @PathVariable Integer userId){
-        return ResponseEntity.ok(this.userService.getUserById(userId));
-    }
+//
+//        return ResponseEntity.ok(updatedUser);
+//
+//    }
+//
+//    @DeleteMapping("/{userId}")
+//    public ResponseEntity<ApiResponse> deleteUser(@PathVariable Integer userId){
+//
+////        UserDto updatedUser =  this.userService.updateUser(userDto,userId);
+//
+//        this.userService.userDelete(userId);
+//
+//        return new ResponseEntity(new ApiResponse("User Deleted Successfully",true),HttpStatus.OK);
+//
+//    }
+//
+//
+//    @GetMapping("/")
+//    public ResponseEntity<List<UserDto>> getAllUsers(){
+//        return ResponseEntity.ok(this.userService.getAllUser());
+//    }
+//
+//
+//    @GetMapping("/{userId}")
+//    public ResponseEntity<UserDto> getSingleUserById( @PathVariable Integer userId){
+//        return ResponseEntity.ok(this.userService.getUserById(userId));
+//    }
 
 
 
