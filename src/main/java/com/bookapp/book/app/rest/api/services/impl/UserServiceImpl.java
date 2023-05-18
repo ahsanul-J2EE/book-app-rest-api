@@ -5,11 +5,8 @@ import com.bookapp.book.app.rest.api.exceptions.ResourceNotFoundException;
 import com.bookapp.book.app.rest.api.models.UserDto;
 import com.bookapp.book.app.rest.api.repositories.UserRepo;
 import com.bookapp.book.app.rest.api.services.UserService;
-import lombok.Getter;
-import lombok.Setter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -96,7 +93,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private UserDto usertoDto(User user){
-        UserDto userDto = this.modelMapper.map(user,UserDto.class);;
+        UserDto userDto = this.modelMapper.map(user,UserDto.class);
 //        userDto.setId(user.getId());
 //        userDto.setName(user.getName());
 //        userDto.setEmail(user.getEmail());

@@ -26,6 +26,40 @@ public class UserController {
         return new ResponseEntity<>(createdUserDto, HttpStatus.CREATED);
     }
 
+    @PutMapping("/{userId}")
+    public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto,@PathVariable Integer userId){
+
+        UserDto updatedUser =  this.userService.updateUser(userDto,userId);
+
+        return ResponseEntity.ok(updatedUser);
+
+    }
+
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<ApiResponse> deleteUser(@PathVariable Integer userId){
+
+//        UserDto updatedUser =  this.userService.updateUser(userDto,userId);
+
+        this.userService.userDelete(userId);
+
+        return new ResponseEntity(new ApiResponse("User Deleted Successfully",true),HttpStatus.OK);
+
+    }
+
+
+    @GetMapping("/")
+    public ResponseEntity<List<UserDto>> getAllUsers(){
+        return ResponseEntity.ok(this.userService.getAllUser());
+    }
+
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<UserDto> getSingleUserById( @PathVariable Integer userId){
+        return ResponseEntity.ok(this.userService.getUserById(userId));
+    }
+
+
+
 
 
 }
