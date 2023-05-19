@@ -14,8 +14,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.bookapp.book.app.rest.api.exceptions.BookDoseNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -30,17 +32,24 @@ public class UserServiceImpl implements UserService {
 
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+
     @Override
     public ResponseEntity<Object> createUser(UserDto userDto) {
 
 //        User user = this.dtoToUser(userDto);
 //        User savedUser = this.userRepo.save(user);
 //        return this.usertoDto(savedUser);
+        Optional<User> checkUser = Optional.ofNullable(userRepo.findByEmail(userDto.getEmail()));
+
+        if(checkUser.isPresent()){
+            throw new BookDoseNotFoundException("User already exists");
+        }
 
         User user = User.builder()
                 .firstName(userDto.getFirstName())
                 .lastName(userDto.getLastName())
                 .email(userDto.getEmail())
+                .address(userDto.getAddress())
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .role(userDto.getRole())
                 .build();
